@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import Indexer from "../../application/routes";
+import {useDispatch} from "react-redux";
+import {setStoreData} from "../../redux/states/reducer";
 
 export default function Pokemon(props) {
-    const [data, setData] = useState([]);
+    const [resultData, setResultData] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         let options = {
@@ -11,16 +13,26 @@ export default function Pokemon(props) {
             url: ('https://pokeapi.co/api/v2/pokemon/'+ props.name),
         };
         axios.request(options).then(function (response) {
-            setData(response.data);
+            setResultData(response.data);
+            console.log(response.data);
+            dispatch(setStoreData(response.data));
         });
-        return data;
-    }, [])
+        return resultData;
+    }, [props])
 
-    console.log(data);
+    if (resultData.sprites) {
 
-    return (
-        <div>
-            <Indexer dataSource={data}/>
-        </div>
-    );
+        return (
+            <div>
+                Si hay!
+                <img src={resultData.sprites['front_default']}/>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                Hola
+            </div>
+        );
+    }
 }

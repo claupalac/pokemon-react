@@ -1,14 +1,15 @@
 import './App.css';
 import React from "react";
-import PokeNavBar from "./components/env/PokeNavBar";
+import Indexer from "./application/routes";
+import {Provider} from "react-redux";
+import {store} from "./redux";
 
 function App() {
     return (
-        <div>
-            <PokeNavBar/>
-        </div>
+        <Provider store={store}>
+            <Indexer/>
+        </Provider>
     );
-
 }
 
 export default App;
