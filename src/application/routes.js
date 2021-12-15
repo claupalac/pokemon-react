@@ -1,22 +1,20 @@
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
-import Powers from '../pages/Powers';
+import Skills from '../pages/Skills';
 import HomePage from '../pages/Home';
 import {Container, Navbar} from "react-bootstrap";
 import React, {useState} from "react";
 import Pokemon from "../components/characters/Pokemon";
 
-export default function Indexer (props) {
+export default function Indexer () {
 
     const [searchField, setSearchField] = useState('');
-    const [pokemonName, setPokemonName] = useState('');
-    const [pokemon, setPokemon] = useState(<div>NO hay</div>);
+    const [pokemon, setPokemon] = useState();
 
     const onInput = ({target:{value}}) => setSearchField(value);
 
     function handleSearch() {
         if(searchField)
         {
-            console.log(searchField);
             setPokemon(<Pokemon name={searchField}/>)
         }
     }
@@ -26,7 +24,7 @@ export default function Indexer (props) {
                 <Navbar bg="light" expand="lg">
                     <Container fluid>
                         <Link to="/Home">Home</Link>
-                        <Link to="/">Powers</Link>
+                        <Link to="/">Skills</Link>
                             <input
                                 type="search"
                                 placeholder="Search"
@@ -43,7 +41,7 @@ export default function Indexer (props) {
                 {pokemon}
             </div>
             <Routes>
-                <Route exact path={"/"} element={<Powers/>}/>
+                <Route exact path={"/"} element={<Skills/>}/>
                 <Route path={"/Home/"} element={<HomePage/>}/>
                 <Route path={"*"} element={() => <div>Perro Tramposo</div>}/>
             </Routes>

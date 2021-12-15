@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {setStoreData} from "../../redux/states/reducer";
+import {setOtraCosa, setStoreData} from "../../redux/states/reducer";
 
 export default function Pokemon(props) {
     const [resultData, setResultData] = useState([]);
@@ -14,8 +14,8 @@ export default function Pokemon(props) {
         };
         axios.request(options).then(function (response) {
             setResultData(response.data);
-            console.log(response.data);
             dispatch(setStoreData(response.data));
+            dispatch(setOtraCosa({'hola':1234}));
         });
         return resultData;
     }, [props])
